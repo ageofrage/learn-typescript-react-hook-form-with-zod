@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { FirstName } from "./Name/FirstName"
 import { formSchema, FormSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LastName } from "./Name/LastName";
 
 export const Form = () => {
   const { register, formState: { errors } } = useForm<FormSchema>({
@@ -13,21 +14,7 @@ export const Form = () => {
 		<form>
 			<div className="grid gap-6 mb-6 md:grid-cols-2">
         <FirstName attr={register('name.firstName')} error={errors.name?.firstName} />
-				<div>
-					<label
-						htmlFor="last_name"
-						className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-					>
-						Last name
-					</label>
-					<input
-						type="text"
-						id="last_name"
-						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						placeholder="Doe"
-						required
-					/>
-				</div>
+        <LastName attr={register('name.lastName')} error={errors.name?.lastName} />
 				<div>
 					<label
 						htmlFor="company"
