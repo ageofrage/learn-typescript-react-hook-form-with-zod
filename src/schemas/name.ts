@@ -5,4 +5,4 @@ export const nameSchema = z.object({
   lastName: z.string().min(1, '苗字は必須です'),
 });
 
-export type Name = z.infer<typeof nameSchema>;
+export type NameSchema = z.infer<typeof nameSchema>;
