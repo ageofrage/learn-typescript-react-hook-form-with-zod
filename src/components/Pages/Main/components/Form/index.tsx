@@ -1,10 +1,18 @@
+import { useForm } from "react-hook-form";
 import { FirstName } from "./Name/FirstName"
+import { formSchema, FormSchema } from "./schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const Form = () => {
+  const { register, formState: { errors } } = useForm<FormSchema>({
+    resolver: zodResolver(formSchema),
+    mode: 'all'
+  });
+
 	return (
 		<form>
 			<div className="grid gap-6 mb-6 md:grid-cols-2">
-        <FirstName />
+        <FirstName attr={register('name.firstName')} error={errors.name?.firstName} />
 				<div>
 					<label
 						htmlFor="last_name"
