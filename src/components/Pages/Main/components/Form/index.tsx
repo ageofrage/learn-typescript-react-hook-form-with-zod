@@ -1,8 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FirstName } from "./Name/FirstName"
 import { formSchema, FormSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LastName } from "./Name/LastName";
+import { Input } from "./Input";
 
 export const Form = () => {
   const { register, formState: { errors }, handleSubmit } = useForm<FormSchema>({
@@ -17,8 +16,22 @@ export const Form = () => {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="grid gap-6 mb-6 md:grid-cols-2">
-        <FirstName attr={register('name.firstName')} error={errors.name?.firstName} />
-        <LastName attr={register('name.lastName')} error={errors.name?.lastName} />
+        <Input
+          type='text'
+          id="first_name"
+          label="名前"
+          placeholder='太郎'
+          {...register('name.firstName')}
+          error={errors.name?.firstName?.message}
+        />
+        <Input
+          type='text'
+          id="last_name"
+          label="苗字"
+          placeholder='田中'
+          {...register('name.lastName')}
+          error={errors.name?.lastName?.message}
+        />
 				<div>
 					<label
 						htmlFor="company"
