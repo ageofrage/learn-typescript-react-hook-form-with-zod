@@ -1,17 +1,21 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { FirstName } from "./Name/FirstName"
 import { formSchema, FormSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LastName } from "./Name/LastName";
 
 export const Form = () => {
-  const { register, formState: { errors } } = useForm<FormSchema>({
+  const { register, formState: { errors }, handleSubmit } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     mode: 'all'
   });
 
+  const onSubmit: SubmitHandler<FormSchema> = (data) => {
+    console.log(data);
+  };
+
 	return (
-		<form>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="grid gap-6 mb-6 md:grid-cols-2">
         <FirstName attr={register('name.firstName')} error={errors.name?.firstName} />
         <LastName attr={register('name.lastName')} error={errors.name?.lastName} />
